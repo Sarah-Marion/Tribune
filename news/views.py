@@ -10,6 +10,7 @@ from .models import Article
 from .forms import NewsLetterForm
 from .email import send_welcome_email
 from django.contrib.auth.decorators import login_required
+from .forms import NewsArticleForm, NewsLetterForm
 
 # Create your views here.
 def welcome(request):
@@ -112,3 +113,15 @@ def article(request,article_id):
     except DoesNotExist:
         raise Http404()
     return render(request, "all-news/article.html", {"article":article})
+
+    current_user = request.user
+    if request.method == 'POST':
+        form = NewsArticleForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            article = form.save(commit=False)
+            article.editor = current_user
+            article.save()
+        else:
+            form = NewsArticleForm()
+        return render(request, 'new_article.html',{"form":form})
