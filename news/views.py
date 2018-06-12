@@ -114,6 +114,7 @@ def article(request,article_id):
         raise Http404()
     return render(request, "all-news/article.html", {"article":article})
 
+def new_article(request):
     current_user = request.user
     if request.method == 'POST':
         form = NewsArticleForm(request.POST, request.FILES)
