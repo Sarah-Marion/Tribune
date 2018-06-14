@@ -3,41 +3,49 @@
 
 
 {% block content %}
-    {{block.super}}
-
-    <div class="container">
-
-        <!-- Looping through news -->
+{{block.super}}
+<div class="container">
+    <div class="row display-news">
+        <!-- Loop through news -->
         {% for news_item in news %}
-
-        <div class="row">
-            <!-- Displaying News articles -->
-            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                <h2 class="text-center"> {{ news_item.title }} </h2>
-            </div>
-
-             <!--Display news Article images  -->
-            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 articles-home">
+            {% if news_item.article_image %}
             <img src="{{news_item.article_image.url}}" class="img-responsive" alt="Image">
-            </div>
-
+            {% else %}
+            <p>fdfdf</p>
+            {% endif %}
+            <h2> {{news_item.title}} </h2>
+            <hr>
+            <p> {{news_item.post|truncatechars:400}}<a href="/article/{{news_item.id}}" class="btn btn-link">Read more</a></p>
+                <p class="small"> Tags:
+                    {% for tag in news_item.tags.all %}
+                    {{tag}} 
+                    {% endfor %}
+                </p>
+            <p> {{news_item.editor}} </p>
+            <p class="small">Posted on: {{news_item.pub_date}} </p>
         </div>
         {% empty %}
-        <div class="row">
-            <h2 class="text-center"> There are No News Items </h2>
+        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+            <h2> No Articles today </h2>
         </div>
-        {% endfor %}
+        {% endfor %}        
     </div>
-
-    <div class="container-fluid">
-
-        <form action="{% url 'newsToday' %}" method="post">
-            {% csrf_token %}
-
-            {% bootstrap_form letterForm layout='inline' %}
-            <input type="submit" value="Subscribe">
-        </form>
-
+    <div class="row">
+        <div class="col-md-5">
+            <form action="{% url 'newsToday' %}" method="POST">
+                {% csrf_token %}
+                {% bootstrap_form letterForm layout='inline' %}
+                <input type="submit" value="Subscribe">
+            </form>
+        </div>
     </div>
-
+</div>
 {% endblock %}
+
+
+<!-- {% if news_item.article_image.url %}
+            <img src="{{news_item.article_image.url}}" class="img-responsive" alt="Image">
+            {% else %}
+            <p></p>
+            {% endif %} -->

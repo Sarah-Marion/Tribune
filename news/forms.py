@@ -10,5 +10,5 @@ class NewsArticleForm(forms.ModelForm):
         model = Article
         exclude = ['editor', 'pub_date']
         widgets = {
-            'tags': forms.CheckboxSelectMultiple(),
+            'tag': forms.CheckboxSelectMultiple()
         }

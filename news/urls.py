@@ -14,5 +14,7 @@ urlpatterns=[
     url(r'^article/(\d+)',views.article,name ='article'),
     url(r'^new/article$', views.new_article, name='new-article')
 ]
+
 if settings.DEBUG:
-    urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

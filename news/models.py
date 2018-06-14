@@ -41,7 +41,7 @@ class Article(models.Model):
     editor = models.ForeignKey(User, on_delete=models.CASCADE)
     tag = models.ManyToManyField(tag)
     pub_date = models.DateTimeField(auto_now_add=True)
-    article_image = models.ImageField(upload_to = 'articles/', blank=True)
+    article_image = models.ImageField(upload_to = 'articles/')
 
     @classmethod
     def today_news(cls):

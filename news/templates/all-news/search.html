@@ -13,9 +13,23 @@
 
         {% if articles %}
             {% for article in articles %}
-                <div class="col-sm-6 col-md-3">
-                    <h1> {{article.title}} </h1>
-                </div>
+            <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 articles-home">
+                {% if article.article_image.url %}
+                <img src="{{article.article_image.url}}" class="img-responsive" alt="Image">
+                {% else %}
+                <p></p>
+                {% endif %}
+                <h2> {{article.title}} </h2>
+                <hr>
+                <p> {{article.post|truncatechars:400}}<a href="/article/{{article.id}}" class="btn btn-link">Read more</a></p>
+                    <p class="small"> Tags:
+                        {% for tag in article.tags.all %}
+                        {{tag}} 
+                        {% endfor %}
+                    </p>
+                <p> {{article.editor}} </p>
+                <p class="small">Posted on: {{article.pub_date}} </p>
+            </div>
             {% endfor %}
         {% endif %}
     </div>
