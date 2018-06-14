@@ -12,11 +12,13 @@
             {% if news_item.article_image %}
             <img src="{{news_item.article_image.url}}" class="img-responsive" alt="Image">
             {% else %}
-            <p>fdfdf</p>
+            <p>No image</p>
             {% endif %}
             <h2> {{news_item.title}} </h2>
             <hr>
-            <p> {{news_item.post|truncatechars:400}}<a href="/article/{{news_item.id}}" class="btn btn-link">Read more</a></p>
+            {% autoescape on %}
+            <p> {{news_item.post|safe|truncatechars:400}}<a href="/article/{{news_item.id}}" class="btn btn-link">...Read more</a></p>
+            {% endautoescape %}
                 <p class="small"> Tags:
                     {% for tag in news_item.tags.all %}
                     {{tag}} 
