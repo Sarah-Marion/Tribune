@@ -3,7 +3,11 @@
 
 <div class="container">
     <div class="row">
+        {% if article.article_image %}
         <img src="{{article.article_image.url}}" class="img-responsive" alt="">
+        {% else %}
+        <p>fdfdf</p>
+        {% endif %}
     </div>
 
     <div class="row">
