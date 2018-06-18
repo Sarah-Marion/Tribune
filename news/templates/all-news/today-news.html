@@ -44,7 +44,11 @@
     </div>
 </div>
 {% endblock %}
-
+<!-- End of the block content -->
+{% block scripts %}
+{{block.super}}
+<script src="{%static 'js/newsletter.js' %}"></script>
+{% endblock %}
 
 <!-- {% if news_item.article_image.url %}
             <img src="{{news_item.article_image.url}}" class="img-responsive" alt="Image">

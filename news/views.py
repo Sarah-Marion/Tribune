@@ -4,12 +4,13 @@ from __future__ import unicode_literals
 from django.shortcuts import render, redirect
 
 
-from django.http import HttpResponse, Http404, HttpResponseRedirect
+from django.http import HttpResponse, Http404, HttpResponseRedirect, JsonResponse
 import datetime as dt
 from .models import Article, NewsLetterRecipients
 from .forms import NewsLetterForm, NewsArticleForm
 from .email import send_welcome_email
 from django.contrib.auth.decorators import login_required
+
 
 # Create your views here.
 def welcome(request):
@@ -68,10 +69,12 @@ def past_days_news(request, past_date):
 
 
 def news_today(request):
-    date = dt.date.today()
     # news = Article.today_news()
-    news = Article.objects.all()
+    # news = Article.objects.all()
     # news.reverse()
+    date = dt.date.today()
+    news = Article.today_news()
+    form = NewsLetterForm()
 
     if request.method == 'POST':
         form = NewsLetterForm(request.POST)
@@ -126,3 +129,13 @@ def new_article(request):
         form = NewsArticleForm()
     
     return render(request, 'new_article.html',{"form":form})
+
+def newsletter(request):
+    name = request.POST.get('your_name')
+    email = request.POST.get('email')
+
+    recipient = NewsLetterRecipients(name=name, email=email)
+    recipient.save()
+    send_welcome_email(name, email)
+    data = {'success':'You have been sucessfully added to mailing list'}
+    return JsonResponse(data)
