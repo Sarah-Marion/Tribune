@@ -12,6 +12,7 @@ from .email import send_welcome_email
 from django.contrib.auth.decorators import login_required
 from rest_framework.response import Response 
 from rest_framework.views import APIView
+from rest_framework import status
 from .models import MoringaMerch
 from .serializer import MerchSerializer
 
@@ -150,3 +151,10 @@ class MerchList(APIView):
         all_merch = MoringaMerch.objects.all()
         serializer = MerchSerializer(all_merch, many=True)
         return Response(serializer.data)
+
+    def post(self, request, format=None):
+        serializer = MerchSerializer(data = request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.Http_201_CREATED)
+        return Response(serializer.errors, status=status.Http_400_BAD_REQUEST)
