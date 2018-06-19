@@ -1,5 +1,6 @@
 {% extends 'all-news/base.html' %}
 {% load bootstrap3 %}
+{% load static%}
 
 
 {% block content %}
@@ -45,9 +46,10 @@
 </div>
 {% endblock %}
 <!-- End of the block content -->
+
 {% block scripts %}
-{{block.super}}
-<script src="{%static 'js/newsletter.js' %}"></script>
+    {{block.super}}
+    <script src="{% static 'js/newsletter.js' %}"></script>
 {% endblock %}
 
 <!-- {% if news_item.article_image.url %}
