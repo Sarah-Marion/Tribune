@@ -15,7 +15,7 @@ from rest_framework.views import APIView
 from rest_framework import status
 from .models import MoringaMerch
 from .serializer import MerchSerializer
-from permissions import IsAdminOrReadOnly
+from .permissions import IsAdminOrReadOnly
 
 
 # Create your views here.
