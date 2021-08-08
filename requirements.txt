@@ -5,7 +5,7 @@ django-bootstrap3==15.0.0
 django-heroku==0.3.1
 django-registration==2.4.1
 django-tinymce==3.3.0
-djangorestframework==3.8.2
+djangorestframework==3.12.4
 gunicorn==20.1.0
 Pillow==5.1.0
 pkg-resources==0.0.0
