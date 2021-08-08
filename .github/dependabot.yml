@@ -1,0 +1,19 @@
+version: 2
+updates:
+- package-ecosystem: pip
+  directory: "/"
+  schedule:
+    interval: monthly
+    time: "02:00"
+    timezone: Africa/Nairobi
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: pytz
+    versions:
+    - "2020.5"
+  - dependency-name: django-registration
+    versions:
+    - 3.1.1
+  - dependency-name: pillow
+    versions:
+    - 6.2.0
