@@ -14,4 +14,4 @@ psycopg2-binary==2.9.1
 python-decouple==3.1
 pytz==2021.1
 unicorn==1.0.1
-whitenoise==3.3.1
+whitenoise==5.3.0
